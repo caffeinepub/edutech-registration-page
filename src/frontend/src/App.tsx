@@ -782,14 +782,29 @@ function StipendBanner() {
           }}
         >
           <p
-            className="font-orbitron text-2xl md:text-3xl lg:text-4xl font-bold leading-tight"
+            className="font-orbitron font-bold leading-tight"
             style={{
               color: "oklch(0.92 0.22 155)",
               textShadow:
                 "0 0 20px oklch(0.7 0.22 155 / 0.9), 0 0 40px oklch(0.6 0.2 155 / 0.6)",
             }}
           >
-            💰 Get Stipend during your session — Earn While You Learn
+            <span className="text-2xl md:text-3xl lg:text-4xl">💰 Get </span>
+            <span
+              className="text-5xl md:text-6xl lg:text-7xl"
+              style={{
+                color: "#FF00CC",
+                textShadow:
+                  "0 0 20px #FF00CC, 0 0 40px #CC00FF, 0 0 60px #FF00CC",
+                display: "inline-block",
+              }}
+            >
+              STIPEND
+            </span>
+            <span className="text-2xl md:text-3xl lg:text-4xl">
+              {" "}
+              during your session — Earn While You Learn
+            </span>
           </p>
         </div>
       </div>
@@ -1664,36 +1679,46 @@ function AdminDashboard({ token, onLogout, content }: AdminDashboardProps) {
     }
   };
 
-  const exportCSV = () => {
+  const exportPDF = () => {
     if (!students.length) {
       toast.error("No students to export.");
       return;
     }
-    const headers = [
-      "Full Name",
-      "Email",
-      "Phone",
-      "Course",
-      "City",
-      "Registration Date",
-    ];
-    const rows = students.map((s) => [
-      `"${s.fullName}"`,
-      `"${s.email}"`,
-      `"${s.phone}"`,
-      `"${s.courseInterest}"`,
-      `"${s.city}"`,
-      `"${s.registrationDate}"`,
-    ]);
-    const csv = [headers, ...rows].map((r) => r.join(",")).join("\n");
-    const blob = new Blob([csv], { type: "text/csv" });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement("a");
-    a.href = url;
-    a.download = `edutech-registrations-${new Date().toISOString().split("T")[0]}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-    toast.success("CSV downloaded!");
+    const printWindow = window.open("", "_blank");
+    if (!printWindow) return;
+    const rows = students
+      .map(
+        (s, i) => `
+      <tr style="background:${i % 2 === 0 ? "#1a1a2e" : "#16213e"}">
+        <td style="padding:8px;border:1px solid #333">${s.fullName}</td>
+        <td style="padding:8px;border:1px solid #333">${s.email}</td>
+        <td style="padding:8px;border:1px solid #333">${s.phone}</td>
+        <td style="padding:8px;border:1px solid #333">
+        <td style="padding:8px;border:1px solid #333">${s.courseInterest}</td>
+        <td style="padding:8px;border:1px solid #333">${s.city}</td>
+        <td style="padding:8px;border:1px solid #333">
+        <td style="padding:8px;border:1px solid #333">${s.registrationDate}</td>
+      </tr>`,
+      )
+      .join("");
+    printWindow.document.write(`
+      <html><head><title>EDUTECH Registrations</title>
+      <style>body{font-family:Arial,sans-serif;background:#0d0d1a;color:#eee;padding:20px}
+      h1{color:#00ffcc;text-align:center}
+      table{width:100%;border-collapse:collapse;font-size:12px}
+      th{background:#0a3d62;color:#00ffcc;padding:10px;border:1px solid #333;text-align:left}
+      @media print{body{background:white;color:black}h1{color:#006644}th{background:#006644;color:white}}
+      </style></head><body>
+      <h1>EDUTECH - Student Registrations</h1>
+      <p style="text-align:center;color:#aaa">Generated: ${new Date().toLocaleString()} | Total: ${students.length} students</p>
+      <table><thead><tr>
+        <th>Full Name</th><th>Email</th><th>Mobile No.</th>
+        <th>Course</th><th>City/Location</th><th>Registration Date</th>
+      </tr></thead><tbody>${rows}</tbody></table>
+      </body></html>`);
+    printWindow.document.close();
+    printWindow.focus();
+    setTimeout(() => printWindow.print(), 500);
   };
 
   const inputStyle =
@@ -1819,23 +1844,23 @@ function AdminDashboard({ token, onLogout, content }: AdminDashboardProps) {
               </div>
               <button
                 type="button"
-                onClick={exportCSV}
+                onClick={exportPDF}
                 data-ocid="admin.export.button"
                 className="flex items-center gap-2 px-4 py-2 rounded-lg text-xs font-medium border transition-all duration-200"
                 style={{
-                  borderColor: "oklch(0.82 0.18 210 / 0.4)",
-                  color: "oklch(0.82 0.18 210)",
+                  borderColor: "oklch(0.82 0.18 330 / 0.6)",
+                  color: "oklch(0.82 0.18 330)",
                 }}
                 onMouseEnter={(e) => {
                   (e.currentTarget as HTMLElement).style.background =
-                    "oklch(0.82 0.18 210 / 0.08)";
+                    "oklch(0.82 0.18 330 / 0.1)";
                 }}
                 onMouseLeave={(e) => {
                   (e.currentTarget as HTMLElement).style.background =
                     "transparent";
                 }}
               >
-                <Download size={14} /> Export CSV
+                <Download size={14} /> Export to PDF
               </button>
             </div>
 
