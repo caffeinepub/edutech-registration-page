@@ -137,7 +137,7 @@ function HeroSection({ content }: { content: Content | undefined }) {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-start justify-center overflow-x-hidden"
       style={{
         backgroundImage: `url('/assets/generated/hero-bg.dim_1920x1080.jpg')`,
         backgroundSize: "cover",
@@ -235,7 +235,7 @@ function HeroSection({ content }: { content: Content | undefined }) {
       {/* Content */}
       <div
         className="relative z-10 text-center px-6 max-w-5xl mx-auto"
-        style={{ paddingTop: "8rem" }}
+        style={{ paddingTop: "8rem", paddingBottom: "5rem" }}
       >
         {/* Main title */}
         <h1
@@ -326,36 +326,6 @@ function HeroSection({ content }: { content: Content | undefined }) {
               </div>
             </div>
           ))}
-        </div>
-
-        {/* ── Bonus Course Banner ── */}
-        <div
-          className="mt-10 mx-auto max-w-2xl px-6 py-4 rounded-2xl animate-fade-in-up-delay-2 animate-mobile-blink"
-          style={{
-            background:
-              "linear-gradient(135deg, oklch(0.15 0.08 340 / 0.9), oklch(0.12 0.06 320 / 0.9))",
-            border: "2px solid oklch(0.72 0.28 340 / 0.8)",
-            boxShadow:
-              "0 0 30px oklch(0.72 0.28 340 / 0.4), inset 0 0 20px oklch(0.72 0.28 340 / 0.08)",
-          }}
-        >
-          <p
-            className="text-sm md:text-base font-semibold tracking-wide"
-            style={{ color: "oklch(0.92 0.05 60)" }}
-          >
-            🎁 Bonus Course — Advance Level Mobile Repairing....
-            <span
-              className="ml-2 font-orbitron"
-              style={{
-                color: "oklch(0.85 0.22 90)",
-                textShadow:
-                  "0 0 10px oklch(0.85 0.22 90 / 0.8), 0 0 25px oklch(0.85 0.22 90 / 0.5)",
-                fontSize: "1.1em",
-              }}
-            >
-              FREE
-            </span>
-          </p>
         </div>
       </div>
 
@@ -682,6 +652,103 @@ function CoursesSection({ content }: { content: Content | undefined }) {
               </div>
             </div>
           ))}
+        </div>
+      </div>
+    </section>
+  );
+}
+
+// ─── Mobile Repair Banner ─────────────────────────────────────────────────────
+
+function MobileRepairBanner() {
+  return (
+    <section
+      className="w-full py-10 relative"
+      style={{ background: "oklch(0.07 0.04 345)" }}
+    >
+      {/* Radial glow background */}
+      <div
+        className="absolute inset-0 pointer-events-none"
+        style={{
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 50%, oklch(0.72 0.28 340 / 0.12) 0%, transparent 70%)",
+        }}
+      />
+      <div className="max-w-4xl mx-auto px-4 relative z-10">
+        <div
+          className="animate-mobile-blink rounded-3xl px-8 py-10 text-center relative overflow-hidden"
+          style={{
+            background:
+              "linear-gradient(135deg, oklch(0.14 0.1 345 / 0.95) 0%, oklch(0.11 0.07 320 / 0.95) 50%, oklch(0.14 0.1 345 / 0.95) 100%)",
+            border: "3px solid oklch(0.72 0.28 340 / 0.9)",
+            boxShadow:
+              "0 0 40px oklch(0.72 0.28 340 / 0.6), 0 0 80px oklch(0.72 0.28 340 / 0.3), 0 0 120px oklch(0.72 0.28 340 / 0.15), inset 0 0 40px oklch(0.72 0.28 340 / 0.08)",
+          }}
+        >
+          {/* Inner sparkle overlay */}
+          <div
+            className="absolute inset-0 pointer-events-none rounded-3xl"
+            style={{
+              background:
+                "radial-gradient(ellipse 70% 50% at 50% 0%, oklch(0.72 0.28 340 / 0.15) 0%, transparent 60%)",
+            }}
+          />
+
+          {/* Top sparkles */}
+          <div className="text-2xl mb-3 tracking-widest">✨ ✨ ✨</div>
+
+          {/* Gift emoji + title row */}
+          <div className="flex items-center justify-center gap-4 mb-4">
+            <span className="text-5xl md:text-6xl">🎁</span>
+            <div className="text-left">
+              <p
+                className="font-orbitron font-bold tracking-widest uppercase text-white text-lg md:text-2xl"
+                style={{
+                  textShadow: "0 0 20px oklch(0.72 0.28 340 / 0.8)",
+                  letterSpacing: "0.15em",
+                }}
+              >
+                Bonus Course
+              </p>
+              <p
+                className="font-orbitron font-black text-xl md:text-3xl mt-1"
+                style={{
+                  color: "oklch(0.88 0.2 340)",
+                  textShadow:
+                    "0 0 20px oklch(0.88 0.2 340 / 0.9), 0 0 40px oklch(0.72 0.28 340 / 0.6)",
+                  letterSpacing: "0.05em",
+                }}
+              >
+                Advance Level Mobile Repairing
+              </p>
+            </div>
+          </div>
+
+          {/* FREE badge */}
+          <div className="flex items-center justify-center gap-3 mt-5">
+            <span className="text-2xl">⭐</span>
+            <div
+              className="font-orbitron font-black px-8 py-3 rounded-full"
+              style={{
+                fontSize: "2rem",
+                color: "oklch(0.85 0.22 90)",
+                background:
+                  "linear-gradient(135deg, oklch(0.2 0.12 90 / 0.6), oklch(0.15 0.08 80 / 0.6))",
+                border: "2px solid oklch(0.85 0.22 90 / 0.8)",
+                textShadow:
+                  "0 0 15px oklch(0.85 0.22 90 / 1), 0 0 30px oklch(0.85 0.22 90 / 0.7), 0 0 50px oklch(0.85 0.22 90 / 0.4)",
+                boxShadow:
+                  "0 0 20px oklch(0.85 0.22 90 / 0.5), 0 0 40px oklch(0.85 0.22 90 / 0.25)",
+                letterSpacing: "0.2em",
+              }}
+            >
+              FREE
+            </div>
+            <span className="text-2xl">⭐</span>
+          </div>
+
+          {/* Bottom sparkles */}
+          <div className="text-2xl mt-3 tracking-widest">✨ ✨ ✨</div>
         </div>
       </div>
     </section>
@@ -2364,8 +2431,9 @@ export default function App() {
         heroTagline={content?.heroTagline || "Where Skills Meet Technology"}
       />
       <HeroSection content={content} />
-      <StipendBanner />
+      <MobileRepairBanner />
       <AboutSection content={content} />
+      <StipendBanner />
       <CoursesSection content={content} />
       <WhyChooseSection content={content} />
       <RegistrationForm onSuccess={() => setShowSuccessModal(true)} />
