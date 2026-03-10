@@ -793,9 +793,10 @@ function StipendBanner() {
             <span
               className="text-5xl md:text-6xl lg:text-7xl"
               style={{
-                color: "#FF00CC",
+                color: "#FFFFFF",
+                WebkitTextStroke: "2px #FF00CC",
                 textShadow:
-                  "0 0 20px #FF00CC, 0 0 40px #CC00FF, 0 0 60px #FF00CC",
+                  "0 0 20px #FF00CC, 0 0 40px #FF00CC, 0 0 60px #FF69B4",
                 display: "inline-block",
               }}
             >
@@ -1368,7 +1369,7 @@ function SuccessModal({ onClose }: { onClose: () => void }) {
           className="text-xs animate-fade-in-up-delay-2"
           style={{ color: "oklch(0.55 0.04 250)" }}
         >
-          Our team will review your application and reach out within 24 hours.
+          Our team will reach out within Very Short Time.
         </p>
 
         <button
