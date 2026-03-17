@@ -564,6 +564,30 @@ function CoursesSection({ content }: { content: Content | undefined }) {
       description:
         "Gain practical knowledge in securing systems, ethical hacking, and cyber threat protection.",
     },
+    {
+      id: BigInt(8),
+      name: "API Integration",
+      description:
+        "Learn how different software systems communicate with each other using APIs. This course covers API basics, REST APIs, authentication, and how to integrate third-party services into websites or applications to automate tasks and improve functionality.",
+    },
+    {
+      id: BigInt(9),
+      name: "AI Skill Development",
+      description:
+        "This course introduces the fundamentals of Artificial Intelligence and practical AI tools. Students will learn how to use AI for automation, data analysis, content creation, and productivity to enhance modern digital skills.",
+    },
+    {
+      id: BigInt(10),
+      name: "Marketing Strategies",
+      description:
+        "Understand modern marketing techniques used in digital and offline businesses. The course covers market research, branding, social media marketing, customer targeting, and campaign planning to effectively promote products and services.",
+    },
+    {
+      id: BigInt(11),
+      name: "Client Approchment",
+      description:
+        "Learn professional methods to approach and communicate with clients. This course teaches communication skills, presentation techniques, negotiation strategies, and relationship building to successfully attract and retain clients.",
+    },
   ];
   const courses =
     content?.courses && content.courses.length > 0
@@ -919,7 +943,7 @@ function RegistrationForm({ onSuccess }: RegistrationFormProps) {
     if (!form.phone.trim()) e.phone = "WhatsApp number is required";
     if (!form.courseInterest) e.courseInterest = "Please select a course";
     if (!form.address.trim()) e.address = "Full address is required";
-    if (!form.city.trim()) e.city = "City is required";
+    if (!form.city.trim()) e.city = "Please select a district";
     return e;
   };
 
@@ -1222,25 +1246,63 @@ function RegistrationForm({ onSuccess }: RegistrationFormProps) {
             )}
           </div>
 
-          {/* City */}
+          {/* District */}
           <div>
             <label
               htmlFor="city"
               className={labelClass}
               style={{ color: "oklch(0.72 0.06 240)" }}
             >
-              City / Location *
+              District *
             </label>
-            <input
+            <select
               id="city"
-              type="text"
               value={form.city}
               onChange={(e) => setForm((p) => ({ ...p, city: e.target.value }))}
-              placeholder="Your city"
               className={inputClass}
-              data-ocid="registration.city.input"
-              autoComplete="address-level2"
-            />
+              data-ocid="registration.city.select"
+              style={{
+                background: "oklch(0.12 0.02 240)",
+                color: "oklch(0.9 0.05 240)",
+              }}
+            >
+              <option value="">-- Select District --</option>
+              <option value="Alipurduar">Alipurduar</option>
+              <option value="Bankura">Bankura</option>
+              <option value="Birbhum">Birbhum</option>
+              <option value="Cooch Behar">Cooch Behar</option>
+              <option value="Dakshin Dinajpur">
+                Dakshin Dinajpur (South Dinajpur)
+              </option>
+              <option value="Darjeeling">Darjeeling</option>
+              <option value="Hooghly">Hooghly</option>
+              <option value="Howrah">Howrah</option>
+              <option value="Jalpaiguri">Jalpaiguri</option>
+              <option value="Jhargram">Jhargram</option>
+              <option value="Kalimpong">Kalimpong</option>
+              <option value="Kolkata">Kolkata</option>
+              <option value="Malda">Malda</option>
+              <option value="Murshidabad">Murshidabad</option>
+              <option value="Nadia">Nadia</option>
+              <option value="North 24 Parganas">North 24 Parganas</option>
+              <option value="Paschim Bardhaman">
+                Paschim Bardhaman (West Burdwan)
+              </option>
+              <option value="Paschim Medinipur">
+                Paschim Medinipur (West Midnapore)
+              </option>
+              <option value="Purba Bardhaman">
+                Purba Bardhaman (East Burdwan)
+              </option>
+              <option value="Purba Medinipur">
+                Purba Medinipur (East Midnapore)
+              </option>
+              <option value="Purulia">Purulia</option>
+              <option value="South 24 Parganas">South 24 Parganas</option>
+              <option value="Uttar Dinajpur">
+                Uttar Dinajpur (North Dinajpur)
+              </option>
+            </select>
             {errors.city && (
               <p
                 className="mt-1 text-xs"
@@ -1714,7 +1776,7 @@ function AdminDashboard({ token, onLogout, content }: AdminDashboardProps) {
       <p style="text-align:center;color:#aaa">Generated: ${new Date().toLocaleString()} | Total: ${students.length} students</p>
       <table><thead><tr>
         <th>Full Name</th><th>Email</th><th>Mobile No.</th>
-        <th>Course</th><th>City/Location</th><th>Registration Date</th>
+        <th>Course</th><th>District</th><th>Registration Date</th>
       </tr></thead><tbody>${rows}</tbody></table>
       </body></html>`);
     printWindow.document.close();
